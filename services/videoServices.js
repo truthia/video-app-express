@@ -13,7 +13,7 @@ class VideoServices {
     async getAllVideo(){
         try {
             const respone= await new Promise((resolve,reject)=>{
-                const query= "SELECT * FROM video LEFT JOIN category ON video.category=category.id DESC;"
+                const query= "SELECT * FROM video LEFT JOIN category ON video.category=category.id ORDER BY video.id DESC;"
                 connection.query(query,(err,results)=>{
                     if(err) reject(new Error(err.message))
                     resolve(results)
@@ -21,13 +21,13 @@ class VideoServices {
             })
             return respone
         } catch (error) {
-            console,log(error)
+            console.log(error)
         }
     }
     async getVideoByTitle(title){
         try {
             const respone= await new Promise((resolve,reject)=>{
-                const query= "SELECT * FROM video LEFT JOIN category ON video.category=category.id WHERE video.title = ? DESC;"
+                const query= "SELECT * FROM video LEFT JOIN category ON video.category=category.id WHERE video.title = ? ORDER BY video.id DESC;"
                 connection.query(query,[title],(err,results)=>{
                     if(err) reject(new Error(err.message))
                     resolve(results)
@@ -41,7 +41,7 @@ class VideoServices {
     async getVideoByCategory(category){
         try {
             const respone= await new Promise((resolve,reject)=>{
-                const query= "SELECT * FROM video LEFT JOIN category ON video.category=category.id WHERE category.category_name = ? DESC;"
+                const query= "SELECT * FROM video LEFT JOIN category ON video.category=category.id WHERE category.category_name = ? ORDER BY video.id DESC;"
                 connection.query(query,[category],(err,results)=>{
                     if(err) reject(new Error(err.message))
                     resolve(results)
